@@ -10,13 +10,27 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+
+
+
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 2px black solid;
+            font: 12px sans-serif;
+        }
+
+        td {
+            border: 1px black solid;
+            padding: 5px;
+        }
+    </style>
+
 </head>
 
 
 
 <body>
-
-
     <!-- NavBar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="./Enter.html">Spotify Project</a>
@@ -41,5 +55,28 @@
                 </li>
 
     </nav>
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="d3.min.js?v=3.2.8"></script>
+
+    <script type="text/javascript"charset="utf-8">
+        d3.text("Python/song_data.csv", function(data) {
+            var parsedCSV = d3.csv.parseRows(data);
+
+            var container = d3.select("body")
+                .append("table")
+
+                .selectAll("tr")
+                    .data(parsedCSV).enter()
+                    .append("tr")
+
+                .selectAll("td")
+                    .data(function(d) { return d; }).enter()
+                    .append("td")
+                    .text(function(d) { return d; });
+        });
+    </script>
+
+
 
 </body>
